@@ -19,7 +19,7 @@ export interface Env {
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		const data = await this.queryDatabase(env.p6);
-        return Response.json({ message: "Hello Diego!", dbData: data });
+        return Response.json({ message: "Hello Diego2!", dbData: data });
 		/*return new Response("Hello Diego!");*/
 	},
 
