@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="2" failures="0" errors="0" time="0.28">
-    <testsuite name="test/index.spec.ts" timestamp="2026-10-04T20:39:15.087Z" hostname="cpu-pavilion" tests="2" failures="0" errors="0" skipped="0" time="0.28">
-        <testcase classname="test/index.spec.ts" name="Worker with D1 DB &gt; responds with message and dbData (unit style)" time="0.037">
+<testsuites name="vitest tests" tests="3" failures="0" errors="0" time="1.268">
+    <testsuite name="test/index.spec.ts" timestamp="2026-10-04T20:59:08.646Z" hostname="cpu-pavilion" tests="3" failures="0" errors="0" skipped="0" time="1.268">
+        <testcase classname="test/index.spec.ts" name="Worker with D1 DB &gt; responds with message and dbData (unit style)" time="0.079">
         </testcase>
-        <testcase classname="test/index.spec.ts" name="Worker with D1 DB &gt; responds with message and dbData (integration style)" time="0.034">
+        <testcase classname="test/index.spec.ts" name="Worker with D1 DB &gt; responds with HTML when requested by browser" time="0.044">
+        </testcase>
+        <testcase classname="test/index.spec.ts" name="Worker with D1 DB &gt; responds with message and dbData (integration style)" time="0.037">
         </testcase>
     </testsuite>
 </testsuites>
