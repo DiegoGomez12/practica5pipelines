@@ -7,4 +7,14 @@ export default defineConfig({
 			wrangler: { configPath: "./wrangler.jsonc" },
 		}),
 	],
+	test: {
+		coverage: {
+			provider: "istanbul",
+			reporter: ["text", "json", "html"],
+		},
+		reporters: ["default", "junit"],
+		outputFile: {
+			junit: "./test-results.xml",
+		},
+	},
 });

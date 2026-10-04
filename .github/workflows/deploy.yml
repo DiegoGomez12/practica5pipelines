@@ -1,4 +1,4 @@
-name: Deploy Worker
+name: Deploy Worker Pipeline
 
 on:
   push:
@@ -6,12 +6,13 @@ on:
       - main
 
 jobs:
-  test-and-deploy:
+  uat:
+    name: UAT - Test and Deploy
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -23,11 +24,37 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # - name: Run unit tests
-      #  run: npm test -- --run
+      - name: Run unit tests and generate coverage
+        run: npm run test
 
-      - name: Deploy to Cloudflare Workers
+      - name: Deploy to UAT (Default Environment)
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  production:
+    name: Production - Deploy
+    needs: uat
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy to Production
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --name practica5pipelines-prod
